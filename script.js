@@ -24,6 +24,8 @@
 		var url = tabs[0].url;
 	    var title = tabs[0].title;
 
+	    console.log(tabs[0]);
+
 	    var urlc = url.replace(/https?:\/\/(www\.)?/g,'');
 
 		//console.log('url = '+url);
@@ -53,7 +55,15 @@
 		function yandex_tic (str){
 			var found = str.match(/tcy rang="([0-9]*)" value="([0-9]*)"/);
 		  	var yandex_tic = found[2];
+
+		  	var yafound = str.match(/url domain="(.*)"/);
+		  	var mirror = yafound[1];
+
+		  	if (mirror && mirror!=domen && mirror!='www.'+domen) document.getElementById('yandex_mirror').innerHTML = '<br><span style="color:black;font-size:11px;">[зеркало: <a style="color:red;" target="_blank" href="http://'+mirror+'">'+mirror+'</a>]</span>';
+
+
 		  	if (found[2]==0 && found[1]==1) yandex_tic='<font color="red">АГС</font>';
+
 		  	document.getElementById('yandex_tic').innerHTML = yandex_tic;	
 		}
 		
@@ -102,7 +112,8 @@
 		function yandex_index(str){
 
 			//var found = str.match(/нашлось (.*) ответов/);
-			var found = str.match(/"found":"(.+?)ответ/);
+			//var found = str.match(/"found":"(.+?)ответ/);
+			var found = str.match(/нашлось(.+?)результат/);
 			if (found){
 				var yandex_index = found[1];
 				yandex_index  = yandex_index.replace('—\\n','');
