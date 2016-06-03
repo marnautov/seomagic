@@ -14,6 +14,6 @@
    "name": "Seo Magic - информер тиц, индексации страниц",
    "permissions": [ "storage", "http://*/", "https://*/", "tabs" ],
    "update_url": "https://clients2.google.com/service/update2/crx",
-   "version": "1.43",
+   "version": "1.46",
    "options_page": "options.html"
 }

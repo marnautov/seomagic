@@ -113,7 +113,7 @@
 
 			//var found = str.match(/нашлось (.*) ответов/);
 			//var found = str.match(/"found":"(.+?)ответ/);
-			var found = str.match(/нашлось(.+?)результат/);
+			var found = str.match(/(?:нашлось|нашёлся|нашлась)(.+?)(результат|ответ)/);
 			if (found){
 				var yandex_index = found[1];
 				yandex_index  = yandex_index.replace('—\\n','');
