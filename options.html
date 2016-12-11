@@ -48,6 +48,16 @@
   </select>
 </div>
 
+<div class="form-group">
+<label>Дополнительные настройки:</label><br>
+<label class="checkbox-inline"><input id="show_whois" type="checkbox" value="1">Отображать информацию whois</label>
+<!--
+<br>
+<label class="checkbox-inline"><input type="checkbox" value="">Отображать кнопки тиц и liveinternet</label>
+<br>
+<label class="checkbox-inline"><input type="checkbox" value="">Показывать ip адрес домена</label>
+-->
+</div>
 
 <div class="form-group">
   <label for="linksbox">Панель ссылок:</label>
@@ -64,6 +74,11 @@
 <div id="news">
 <h3>Новости</h3>
 <p>
+<b>Версия 1.5 (12.12.2016)</b>
+<br>
+- Добавлена функция отображения whois сайта (включается в настройках). 
+</p>
+<p>
 <b>Версия 1.43-1.46 (30.05.2016-03.06.2016)</b>
 <br>
 - Исправление ошибок определения количества страниц в индексе яндекса.
@@ -78,6 +93,9 @@
 <br>
 - Исправлена ошибка проверки индексации в google, когда у сайта мало страниц в индексе
 </p>
+
+<span style="cursor: pointer;color:blue;" id="show_more" href="#">...</span>
+<div id="news_more" style="display:none;">
 <p>
 <b>Версия 1.40 (26.03.2016)</b>
 <br>
@@ -113,6 +131,7 @@
 <br>
 - Исправлены незначительные ошибки, оптимизация работы скриптов
 </p>
+</div>
 
 </div>
 

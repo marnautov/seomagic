@@ -1,7 +1,15 @@
+	
+
 	chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
+
+
 
 		// получаем настройки
 		chrome.storage.sync.get(null,function (options) {
+			
+			window.options = options;
+
+			get_url( "http://amserver.ru/amextension.php?domen=" + domen, site_info);
 
 			// проверка индексации страниц в яндекс и гугл
 			if (options['checkpage']&1) get_url( "https://yandex.ru/yandsearch?text=url%3A"+urlc+"%20%7C%20url%3Awww."+urlc, yandex_page);
@@ -24,7 +32,7 @@
 		var url = tabs[0].url;
 	    var title = tabs[0].title;
 
-	    console.log(tabs[0]);
+	    //console.log(tabs[0]);
 
 	    var urlc = url.replace(/https?:\/\/(www\.)?/g,'');
 
@@ -58,6 +66,7 @@
 
 		  	var yafound = str.match(/url domain="(.*)"/);
 		  	var mirror = yafound[1];
+		  	mirror = mirror.replace(/https:\/\//g, '');
 
 		  	if (mirror && mirror!=domen && mirror!='www.'+domen) document.getElementById('yandex_mirror').innerHTML = '<br><span style="color:black;font-size:11px;">[зеркало: <a style="color:red;" target="_blank" href="http://'+mirror+'">'+mirror+'</a>]</span>';
 
@@ -146,6 +155,9 @@
 			if (str.match(/ничего не найдено/)){
 				var google_index = 0;
 			}
+			if (str=='undefined'){
+				var google_index='Error';
+			}
 
 			if (!str){
 				var google_index='Error';
@@ -159,7 +171,8 @@
 		// возраст домена через nic.ru
 
 		if (domen.match(/.ru/)){
-			get_url( "https://www.nic.ru/whois/?query=" + domen, whois_nic);
+			// whois используем через site_info быстрее и надежнее	
+			//get_url( "https://www.nic.ru/whois/?query=" + domen, whois_nic);
 		} else {
 			document.getElementById('vozrast').innerHTML = '';
 		}
@@ -202,18 +215,24 @@
 			document.getElementById('whois_created').innerHTML = result;	
 		}
 
-
 		// информация о сервере
-		get_url( "http://amserver.ru/amextension.php?domen=" + domen, site_info);
-
+		
 		function site_info(str){
 			var info = JSON.parse(str);
-			document.getElementById('site_ip').innerHTML = "<a target='_blank' href='https://www.reg.ru/whois/?dname="+info['ip']+"'>"+info['ip']+"</a> <small>["+info['host']+"]</small>";	
+			var docinfo = "<a target='_blank' href='https://www.reg.ru/whois/?dname="+info['ip']+"'>"+info['ip']+"</a> <small>["+info['host']+"]</small>";	
+			if (info['whois'] && options['show_whois']==true){
+				//docinfo=docinfo+"<br><a href=''>показать данные whois?</a>";
+				var whois_info = "<pre style='font-size:11px;line-height:11px;'>"+info['whois']+"</pre><hr>";
+				document.getElementById('site_info').innerHTML = whois_info;
+				whois_nic(info['whois']);
+			}
+			document.getElementById('site_ip').innerHTML = docinfo;
 		}
 
 
 	});
 
+		
 
 	function get_url(url,callfunc){
 
