@@ -222,7 +222,12 @@
 			var docinfo = "<a target='_blank' href='https://www.reg.ru/whois/?dname="+info['ip']+"'>"+info['ip']+"</a> <small>["+info['host']+"]</small>";	
 			if (info['whois'] && options['show_whois']==true){
 				//docinfo=docinfo+"<br><a href=''>показать данные whois?</a>";
-				var whois_info = "<pre style='font-size:11px;line-height:11px;'>"+info['whois']+"</pre><hr>";
+
+				var width = getComputedStyle(document.getElementById("main")).width;
+				console.log(width);
+
+				var whois_info = "<pre style='max-width:"+width+"!important;overflow:scroll;font-size:11px;line-height:11px;'>"+info['whois']+"</pre><hr>";
+
 				document.getElementById('site_info').innerHTML = whois_info;
 				whois_nic(info['whois']);
 			}
