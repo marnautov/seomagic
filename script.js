@@ -1,4 +1,4 @@
-	
+
 
 	chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
 
@@ -6,7 +6,7 @@
 
 		// получаем настройки
 		chrome.storage.sync.get(null,function (options) {
-			
+
 			window.options = options;
 
 			get_url( "http://amserver.ru/amextension.php?domen=" + domen, site_info);
@@ -73,9 +73,11 @@
 
 		  	if (found[2]==0 && found[1]==1) yandex_tic='<font color="red">АГС</font>';
 
-		  	document.getElementById('yandex_tic').innerHTML = yandex_tic;	
+				store_history('yandex_tic_'+domen,yandex_tic);
+
+		  	document.getElementById('yandex_tic').innerHTML = yandex_tic;
 		}
-		
+
 
 		// индекс страницы в яндексе
 		function yandex_page(str){
@@ -83,7 +85,7 @@
 			if (!str || str.match('/captcha/')){
 				document.getElementById('yap').style.color='orange';
 				return false;
-			}	
+			}
 
 			if (str.match(/ничего не нашлось/)){
 				document.getElementById('yap').style.color='red';
@@ -96,7 +98,7 @@
 		}
 
 		// индекс страницы в google
-		
+
 		function google_page(str){
 
 			if (!str){
@@ -110,7 +112,7 @@
 				document.getElementById('gop').style.color='green';
 				document.getElementById('gop').style.fontWeight='bold';
 			}
-	
+
 
 		}
 
@@ -129,7 +131,7 @@
 				yandex_index  = yandex_index.replace('тыс.','000');
 				yandex_index  = yandex_index.replace('млн','000000');
 				yandex_index  = yandex_index.replace(/[^\/\d]/g,'');
-			}	
+			}
 
 			if (str.match(/ничего не нашлось/)){
 				var yandex_index = 0;
@@ -137,15 +139,17 @@
 
 			if (!str || str.match('/captcha/')){
 				var yandex_index='Error';
-			}	
+			}
 
-			document.getElementById('yandex_index').innerHTML = yandex_index;	
+			if (yandex_index!='Error') store_history('yandex_index_'+domen,yandex_index);
+
+			document.getElementById('yandex_index').innerHTML = yandex_index;
 		}
 
 		// google индекс через выдачу
 		get_url( "https://www.google.ru/search?q=site:" + domen, google_index);
 		function google_index(str){
-			
+
 			var found = str.match(/(?:примерно|Результатов:) (.+?)</);
 			if (found){
 				var google_index = found[1];
@@ -162,31 +166,32 @@
 			if (!str){
 				var google_index='Error';
 			}
-			
 
-			document.getElementById('google_index').innerHTML = google_index;	
+			if (google_index!='Error') store_history('google_index_'+domen,google_index);
+
+			document.getElementById('google_index').innerHTML = google_index;
 		}
 
 
 		// возраст домена через nic.ru
 
 		if (domen.match(/.ru/)){
-			// whois используем через site_info быстрее и надежнее	
+			// whois используем через site_info быстрее и надежнее
 			//get_url( "https://www.nic.ru/whois/?query=" + domen, whois_nic);
 		} else {
 			document.getElementById('vozrast').innerHTML = '';
 		}
 		//get_url( "https://www.reg.ru/whois/?dname=" + domen, whois_nic);
-		
+
 		function whois_nic(str){
-			
-			
+
+
 			var found = str.match(/(created|Creation).+?([0-9]{4}.[0-9]{2}.[0-9]{2})/);
 			if (found){
 				var whois_created = found[2];
 				var d1 = new Date(whois_created);
 				var dn = new Date();
-				
+
 
 				var dmonth = (dn.getMonth()-d1.getMonth());
 				var dyear = (dn.getFullYear()-d1.getFullYear());
@@ -212,14 +217,14 @@
 
 			}
 
-			document.getElementById('whois_created').innerHTML = result;	
+			document.getElementById('whois_created').innerHTML = result;
 		}
 
 		// информация о сервере
-		
+
 		function site_info(str){
 			var info = JSON.parse(str);
-			var docinfo = "<a target='_blank' href='https://www.reg.ru/whois/?dname="+info['ip']+"'>"+info['ip']+"</a> <small>["+info['host']+"]</small>";	
+			var docinfo = "<a target='_blank' href='https://www.reg.ru/whois/?dname="+info['ip']+"'>"+info['ip']+"</a> <small>["+info['host']+"]</small>";
 			if (info['whois'] && options['show_whois']==true){
 				//docinfo=docinfo+"<br><a href=''>показать данные whois?</a>";
 
@@ -237,7 +242,7 @@
 
 	});
 
-		
+
 
 	function get_url(url,callfunc){
 
@@ -245,7 +250,7 @@
 		xhr.open("GET", url, true);
 		xhr.onreadystatechange = function() {
 		  if (xhr.readyState == 4) {
-		  	callfunc(xhr.responseText);		    
+		  	callfunc(xhr.responseText);
 		  }
 		}
 		xhr.send();
@@ -264,8 +269,37 @@
 	}
 
 
+	function store_history(key,value){
 
-	function declOfNum(number, titles) {  
-	    cases = [2, 0, 1, 1, 1, 2];  
-	    return titles[ (number%100>4 && number%100<20)? 2 : cases[(number%10<5)?number%10:5] ];  
+		var element = [Math.floor(Date.now() / 1000),value];
+
+		chrome.storage.local.get(function(story) {
+	  if(typeof(story[key]) !== 'undefined' && story[key] instanceof Array) {
+
+			var len = story[key].length;
+			var last_element = story[key][len-1];
+			if (last_element[1]==value){
+				console.log('value equal');
+				return true;
+			}
+			console.log('last_element:'+last_element);
+
+	    story[key].push(element);
+	  } else {
+			// first
+	    story[key] = [element];
+	  }
+	  chrome.storage.local.set(story);
+		console.log(story);
+	});
+
+
+	}
+
+
+
+
+	function declOfNum(number, titles) {
+	    cases = [2, 0, 1, 1, 1, 2];
+	    return titles[ (number%100>4 && number%100<20)? 2 : cases[(number%10<5)?number%10:5] ];
 	}
