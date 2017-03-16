@@ -3,6 +3,10 @@
 	chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
 
 
+		chrome.storage.local.get(function(story) {
+			window.story = story;
+			//console.log(window.story);
+		})
 
 		// получаем настройки
 		chrome.storage.sync.get(null,function (options) {
@@ -76,6 +80,9 @@
 				store_history('yandex_tic_'+domen,yandex_tic);
 
 		  	document.getElementById('yandex_tic').innerHTML = yandex_tic;
+
+				title_story('yandex_tic',domen);
+
 		}
 
 
@@ -144,6 +151,9 @@
 			if (yandex_index!='Error') store_history('yandex_index_'+domen,yandex_index);
 
 			document.getElementById('yandex_index').innerHTML = yandex_index;
+
+			title_story('yandex_index',domen);
+
 		}
 
 		// google индекс через выдачу
@@ -170,6 +180,9 @@
 			if (google_index!='Error') store_history('google_index_'+domen,google_index);
 
 			document.getElementById('google_index').innerHTML = google_index;
+
+			title_story('google_index',domen);
+
 		}
 
 
@@ -296,6 +309,19 @@
 
 	}
 
+function title_story(attr,domen){
+
+		var story='История '+attr+':';
+		for(var key in window.story[attr+'_'+domen]) {
+				var info = window.story[attr+'_'+domen][key];
+					 var date = new Date(info[0]*1000);
+					 date = date.getDay()+"."+"0"+(date.getMonth()+1)+"."+date.getFullYear();
+					 story=story+"\n"+date+" :: "+info[1];
+		}
+
+		document.getElementById(attr).title = story;
+
+}
 
 
 
