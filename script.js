@@ -315,7 +315,7 @@ function title_story(attr,domen){
 		for(var key in window.story[attr+'_'+domen]) {
 				var info = window.story[attr+'_'+domen][key];
 					 var date = new Date(info[0]*1000);
-					 date = date.getDay()+"."+"0"+(date.getMonth()+1)+"."+date.getFullYear();
+					 date = date.getDate()+"."+('0' + (date.getMonth() + 1)).slice(-2)+"."+date.getFullYear();
 					 story=story+"\n"+date+" :: "+info[1];
 		}
 
