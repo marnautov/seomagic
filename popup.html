@@ -1,100 +1,107 @@
 <html>
 <head>
-<script type="text/javascript" src="script.js"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<style type="text/css">
-#main {
-	font-size:15px;
-	font-family: Georgia;
-	min-width:300px;
-	min-height:200px;
-	line-height: 1.3em;
-}
-#main a {
-	outline:0;
-	text-decoration: none;
-	color:#2c6698;
-}
+	<script type="text/javascript" src="script.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<style type="text/css">
+		#main {
+			font-size: 15px;
+			font-family: Georgia;
+			min-width: 300px;
+			min-height: 200px;
+			line-height: 1.3em;
+		}
 
-#yandex_index,#yandex_tic,#pr,#google_index {
-	font-weight:bold;
-	font-size:1.1em;
-}
+		#main a {
+			outline: 0;
+			text-decoration: none;
+			color: #2c6698;
+		}
 
-#main div {
-	padding:2px;
-}
+		#yandex_index,
+		#yandex_iks,
+		#pr,
+		#google_index {
+			font-weight: bold;
+			font-size: 1.1em;
+		}
 
-#imgopt {
-	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABXUlEQVQ4T8XUuUtdURTF4U8jNlZpgn+AnUIKMWodC40gIQ6F2AgOVYR0DqgRUjg0SbCxCCiEgFMhVmpIlWAVh0rQSitFEBFLQTlyApfHe9xrELzlYe/fXXvtdU6RR/6KHpnnSYDF6EILnuMI3/E733RpCkuxjjosoRL1GMTU/wCHMRAh1fiBEcwU8j5N4QG+YRWHGMVkAjaOTWz/O0sDXqMDv3CFN/gZm8cwgVm8zwoMC/gSm/7iBHPR0yHs4BJNWYA12MJnfEQPevGS+7i1ow0l6EwDvorehM324zbhW9j8C5RFhd0xAfcl+TysxQaW0RdhIYufcIZjVOFDzOLb5A9zgSFnf7ASxwvKAmwezThHeYQu4CtukhHKBYai0NCYUBbOgumvsZ9293OBaziNvj1DEraXBsvnYSsWI6gietWA3SywQkt5Fx+DC0zHG5KV9zTPV2Z1hUZ+ECC3+A7t5UMV81qVOQAAAABJRU5ErkJggg==");
-	no-repeat;
-	height:20px;
-	width:20px;
-	position:fixed;
-	top:4px;
-	right: 8px;
-	cursor:pointer;
-}
-#site_info pre::-webkit-scrollbar{
-	display: none;
-}
+		#main div {
+			padding: 2px;
+		}
 
+		#imgopt {
+			background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABXUlEQVQ4T8XUuUtdURTF4U8jNlZpgn+AnUIKMWodC40gIQ6F2AgOVYR0DqgRUjg0SbCxCCiEgFMhVmpIlWAVh0rQSitFEBFLQTlyApfHe9xrELzlYe/fXXvtdU6RR/6KHpnnSYDF6EILnuMI3/E733RpCkuxjjosoRL1GMTU/wCHMRAh1fiBEcwU8j5N4QG+YRWHGMVkAjaOTWz/O0sDXqMDv3CFN/gZm8cwgVm8zwoMC/gSm/7iBHPR0yHs4BJNWYA12MJnfEQPevGS+7i1ow0l6EwDvorehM324zbhW9j8C5RFhd0xAfcl+TysxQaW0RdhIYufcIZjVOFDzOLb5A9zgSFnf7ASxwvKAmwezThHeYQu4CtukhHKBYai0NCYUBbOgumvsZ9293OBaziNvj1DEraXBsvnYSsWI6gietWA3SywQkt5Fx+DC0zHG5KV9zTPV2Z1hUZ+ECC3+A7t5UMV81qVOQAAAABJRU5ErkJggg==");
+			height: 20px;
+			width: 20px;
+			position: fixed;
+			top: 4px;
+			right: 8px;
+			cursor: pointer;
+		}
 
-</style>
+		#site_info pre::-webkit-scrollbar {
+			display: none;
+		}
+	</style>
 </head>
+
 <body>
-<div id="main">
-<a target="_blank" href="/options.html" id="imgopt"></a>
+	<div id="main">
+		<a target="_blank" href="/options.html" id="imgopt"></a>
 
-<img height="16" src="http://favicon.yandex.net/favicon/{domen}"> <b>{domen}</b><br><br>
-<small>{title} <a target="_blank" href="https://yandex.ru/search/?text={title}">[YA]</a> <a target="_blank" href="https://www.google.ru/search?q={title}">[GO]</a></small>
-<br>
-<hr>
+		<img height="16" src="http://favicon.yandex.net/favicon/{domen}"> <b>{domen}</b><br><br>
+		<small>{title} <a target="_blank" href="https://yandex.ru/search/?text={title}">[YA]</a> <a target="_blank" href="https://www.google.ru/search?q={title}">[GO]</a></small>
+		<br>
+		<hr>
 
-<div>Яндекс: <a target="_blank" href="https://yandex.ru/search/?text=site%3A{domen}"><span id="yandex_index">*</span></a>
+		<div>Яндекс: <a target="_blank" href="https://yandex.ru/search/?text=site%3A{domen}"><span id="yandex_index">*</span></a>
 
-<a id='yap' target="_blank" href="https://yandex.ru/yandsearch?text=url%3A{urlc}%20%7C%20url%3Awww.{urlc}">[YAP]</a>
-</div>
-<div>ТИЦ: <a target="_blank" href="http://www.yandex.ru/cy?base=0&host={domen}"><span id="yandex_tic">*</span></a>  <span id="yandex_mirror"></span></div>
-<div>Google: <a target="_blank" href="https://www.google.ru/search?q=site:{domen}"><span id="google_index">*</span></a>
-<a id='gop' target="_blank" href="https://www.google.ru/search?q=site%3A{urlc}">[GOP]</a>
-</div>
-<div>IP: <span id="site_ip">*</span></div>
-<div id='vozrast'>Возраст: <a target="_blank" href="https://www.nic.ru/whois/?domain={domen}"><span id="whois_created">*</span></a></div>
-<hr>
+			<a id='yap' target="_blank" href="https://yandex.ru/yandsearch?text=url%3A{urlc}%20%7C%20url%3Awww.{urlc}">[YAP]</a>
+		</div>
+		<div>ИКС: <a target="_blank" href="http://www.yandex.ru/cy?base=0&host={domen}"><span id="yandex_iks">*</span></a>
+			<span id="yandex_mirror"></span></div>
+		<div>Google: <a target="_blank" href="https://www.google.ru/search?q=site:{domen}"><span id="google_index">*</span></a>
+			<a id='gop' target="_blank" href="https://www.google.ru/search?q=site%3A{urlc}">[GOP]</a>
+		</div>
+		<div>IP: <span id="site_ip">*</span></div>
+		<div id='vozrast'>Возраст: <a target="_blank" href="https://www.nic.ru/whois/?domain={domen}"><span id="whois_created">*</span></a></div>
+		<hr>
 
-<div>
-<a target="_blank" href="http://www.yandex.ru/cy?base=0&host={domen}"><img src="http://www.yandex.ru/cycounter?{domen}" width="88" height="31" alt="Yandex.CY" border="0"></a>
+		<div>
+			<a target="_blank" href="https://www.yandex.ru/cy?base=0&host={domen}"><img src="https://www.yandex.ru/cycounter?{domen}"
+				 width="88" height="31" alt="Yandex.CY" border="0"></a>
 
 
-<a href='http://www.liveinternet.ru/?{domen}' target="_blank">
-<img src="http://counter.yadro.ru/hit?t14.1;uhttp%3A//{domen}/" alt="" title="LiveInternet: показано число просмотров за 24 часа, посетителей за 24 часа и за сегодня" border="0" width="88" height="31"></a>
+			<a href='http://www.liveinternet.ru/?{domen}' target="_blank">
+				<img src="http://counter.yadro.ru/hit?t14.1;uhttp%3A//{domen}/" alt="" title="LiveInternet: показано число просмотров за 24 часа, посетителей за 24 часа и за сегодня"
+				 border="0" width="88" height="31"></a>
 
-</div>
+		</div>
 
-<hr>
+		<hr>
 
-<div id="linksbox">
-<img height="14" src="http://favicon.yandex.net/favicon/developers.google.com">
-<a target="_blank" href="https://developers.google.com/speed/pagespeed/insights/?hl=ru&url={url}">Google Pagespeed Url</a> / <a target="_blank" href="https://developers.google.com/speed/pagespeed/insights/?hl=ru&url={domen}">Domain</a>
-<br>
-<img height="14" src="http://favicon.yandex.net/favicon/keys.so">
-<a target="_blank" href="https://www.keys.so/report?domain={domen}">Keys.so</a>
-<br>
-<img height="14" src="http://favicon.yandex.net/favicon/spywords.ru">
-<a target="_blank" href="http://spywords.ru/sword.php?sword={domen}">Spywords.ru</a>
-<br>
-<img height="14" src="http://favicon.yandex.net/favicon/reg.ru">
-<a target="_blank" href="https://www.reg.ru/whois/?dname={domen}">Whois</a>
-<br>
-<img height="14" src="http://favicon.yandex.net/favicon/{domen}">
-<a target="_blank" href="http://{domen}/robots.txt">Robots.txt</a>
-</div>
+		<div id="linksbox">
+			<img height="14" src="http://favicon.yandex.net/favicon/developers.google.com">
+			<a target="_blank" href="https://developers.google.com/speed/pagespeed/insights/?hl=ru&url={url}">Google Pagespeed
+				Url</a> / <a target="_blank" href="https://developers.google.com/speed/pagespeed/insights/?hl=ru&url={domen}">Domain</a>
+			<br>
+			<img height="14" src="http://favicon.yandex.net/favicon/keys.so">
+			<a target="_blank" href="https://www.keys.so/report?domain={domen}">Keys.so</a>
+			<br>
+			<img height="14" src="http://favicon.yandex.net/favicon/spywords.ru">
+			<a target="_blank" href="http://spywords.ru/sword.php?sword={domen}">Spywords.ru</a>
+			<br>
+			<img height="14" src="http://favicon.yandex.net/favicon/reg.ru">
+			<a target="_blank" href="https://www.reg.ru/whois/?dname={domen}">Whois</a>
+			<br>
+			<img height="14" src="http://favicon.yandex.net/favicon/{domen}">
+			<a target="_blank" href="http://{domen}/robots.txt">Robots.txt</a>
+		</div>
 
-</div>
+	</div>
 
-<hr>
-<div id="site_info"></div>
+	<hr>
+	<div id="site_info"></div>
 
 </body>
 </html>
