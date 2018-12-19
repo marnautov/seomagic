@@ -70,8 +70,8 @@ chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs)
 		var found = str.match(/cell_type_sqi">([0-9\s]*)<\/td>/);
 		var yandex_iks = found[1].replace(/[^0-9]/,'');
 
-		store_history('yandex_iks_'+domen, yandex_iks);
-		title_story('yandex_iks',domen);
+		//store_history('yandex_iks_'+domen, yandex_iks);
+		//title_story('yandex_iks',domen);
 
 		//console.log(found);
 
@@ -166,11 +166,11 @@ chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs)
 			var yandex_index = 'Error';
 		}
 
-		if (yandex_index != 'Error') store_history('yandex_index_' + domen, yandex_index);
+		//if (yandex_index != 'Error') store_history('yandex_index_' + domen, yandex_index);
 
 		document.getElementById('yandex_index').innerHTML = yandex_index;
 
-		title_story('yandex_index', domen);
+		//title_story('yandex_index', domen);
 
 	}
 
@@ -195,11 +195,11 @@ chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs)
 			var google_index = 'Error';
 		}
 
-		if (google_index != 'Error') store_history('google_index_' + domen, google_index);
+		//if (google_index != 'Error') store_history('google_index_' + domen, google_index);
 
 		document.getElementById('google_index').innerHTML = google_index;
 
-		title_story('google_index', domen);
+		//title_story('google_index', domen);
 
 	}
 
@@ -209,7 +209,7 @@ chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs)
 		// whois используем через site_info быстрее и надежнее
 		//get_url( "https://www.nic.ru/whois/?query=" + domen, whois_nic);
 	} else {
-		document.getElementById('vozrast').innerHTML = '';
+		//document.getElementById('vozrast').innerHTML = '';
 	}
 	//get_url( "https://www.reg.ru/whois/?dname=" + domen, whois_nic);
 
@@ -247,7 +247,7 @@ chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs)
 
 		}
 
-		document.getElementById('whois_created').innerHTML = result;
+		if (typeof result != 'undefined') document.getElementById('whois_created').innerHTML = result;
 	}
 
 	// информация о сервере
@@ -300,46 +300,50 @@ function store_default() {
 }
 
 
-function store_history(key, value) {
+// function store_history(key, value) {
 
-	var element = [Math.floor(Date.now() / 1000), value];
+// 	var element = [Math.floor(Date.now() / 1000), value];
 
-	chrome.storage.local.get(function (story) {
-		if (typeof (story[key]) !== 'undefined' && story[key] instanceof Array) {
-
-			var len = story[key].length;
-			var last_element = story[key][len - 1];
-			if (last_element[1] == value) {
-				console.log('value equal');
-				return true;
-			}
-			console.log('last_element:' + last_element);
-
-			story[key].push(element);
-		} else {
-			// first
-			story[key] = [element];
-		}
-		chrome.storage.local.set(story);
-		console.log(story);
-	});
+// 	chrome.storage.local.get(function (storage) {
 
 
-}
+// 		if (typeof (story[key]) !== 'undefined' && story[key] instanceof Array) {
 
-function title_story(attr, domen) {
+// 			var len = story[key].length;
+// 			var last_element = story[key][len - 1];
+// 			if (last_element[1] == value) {
+// 				console.log('value equal');
+// 				return true;
+// 			}
+// 			console.log('last_element:' + last_element);
 
-	var story = 'История ' + attr + ':';
-	for (var key in window.story[attr + '_' + domen]) {
-		var info = window.story[attr + '_' + domen][key];
-		var date = new Date(info[0] * 1000);
-		date = date.getDate() + "." + ('0' + (date.getMonth() + 1)).slice(-2) + "." + date.getFullYear();
-		story = story + "\n" + date + " :: " + info[1];
-	}
+// 			story[key].push(element);
+// 		} else {
+// 			// first
+// 			story[key] = [element];
+// 		}
+// 		chrome.storage.local.set(story);
+// 		console.log(story);
 
-	document.getElementById(attr).title = story;
+		
+// 	});
 
-}
+
+// }
+
+// function title_story(attr, domen) {
+
+// 	var story = 'История ' + attr + ':';
+// 	for (var key in window.story[attr + '_' + domen]) {
+// 		var info = window.story[attr + '_' + domen][key];
+// 		var date = new Date(info[0] * 1000);
+// 		date = date.getDate() + "." + ('0' + (date.getMonth() + 1)).slice(-2) + "." + date.getFullYear();
+// 		story = story + "\n" + date + " :: " + info[1];
+// 	}
+
+// 	document.getElementById(attr).title = story;
+
+// }
 
 
 
