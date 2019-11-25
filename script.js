@@ -63,11 +63,10 @@ chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs)
 	/**
 	 * Обновляем Яндекс ИКС
 	 */
-	get_url('https://webmaster.yandex.ru/sqi/?host=' + domen, function (str) {
+	get_url('https://webmaster.yandex.ru/siteinfo/?host=' + domen, function (str) {
 
 		//console.log(str);
-
-		var found = str.match(/cell_type_sqi">([0-9\s]*)<\/td>/);
+		var found = str.match(/sqi":([0-9\s]*),/);
 		var yandex_iks = found[1].replace(/[^0-9]/,'');
 
 		//store_history('yandex_iks_'+domen, yandex_iks);
@@ -132,7 +131,7 @@ chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs)
 			return false;
 		}
 
-		if (str.match(/ничего не найдено/)) {
+		if (str.match(/(ничего не найдено|did not match any documents)/)) {
 			document.getElementById('gop').style.color = 'red';
 		} else {
 			document.getElementById('gop').style.color = 'green';
@@ -178,7 +177,7 @@ chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs)
 	get_url("https://www.google.ru/search?q=site:" + domen, google_index);
 	function google_index(str) {
 
-		var found = str.match(/(?:примерно|Результатов:) (.+?)</);
+		var found = str.match(/(?:примерно|Результатов:|About) (.+?)</);
 		if (found) {
 			var google_index = found[1];
 			google_index = google_index.replace(/[^\/\d]/g, '');
