@@ -69,10 +69,18 @@ chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs)
 		var found = str.match(/sqi":([0-9\s]*),/);
 		var yandex_iks = found[1].replace(/[^0-9]/,'');
 
+
+		var found = str.match(/"count":([0-9]*),"views"/);
+		if (found){
+			var reviews_count = parseInt(found[1]);
+			yandex_iks = yandex_iks+' <sup style="font-size:x-small;"><b>'+ reviews_count +'</b> ' + declOfNum(reviews_count,['отзыв','отзыва','отзывов']) + '</sup>';
+		}
+
 		//store_history('yandex_iks_'+domen, yandex_iks);
 		//title_story('yandex_iks',domen);
 
 		//console.log(found);
+
 
 		document.getElementById('yandex_iks').innerHTML = yandex_iks;
 
