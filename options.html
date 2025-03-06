@@ -1,165 +1,175 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>Seo расширение - настройки</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-<style type="text/css">
+  <title>Seo расширение - настройки</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <style type="text/css">
+    #main {
+      font-size: 15px;
+      font-family: Georgia;
+    }
 
-#main {
-	font-size:15px;
-	font-family: Georgia;
-}
 
-
-#news {
-	text-align:left;
-}
-
-</style>
+    #news {
+      text-align: left;
+    }
+  </style>
 </head>
+
 <body>
-<div id="main">
+  <div id="main">
 
-<div class="col-xs-12 col-sm-9" style="float: none;margin: 0 auto;padding:10px;">
+    <div class="col-xs-12 col-sm-9" style="float: none;margin: 0 auto;padding:10px;">
 
-<h1>Настройки</h1>
+      <h1>Настройки</h1>
 
 
-<div class="form-group">
-<label for="fontsize">Размер шрифта:</label>
-<select style="width:300px;" class="form-control" id="fontsize">
- <option value="13">13</option>
- <option value="14">14</option>
- <option value="15">15</option>
- <option value="16">16</option>
- <option value="17">17</option>
- <option value="18">18</option>
-</select>
-</div>
+      <div class="form-group">
+        <label for="fontsize">Размер шрифта:</label>
+        <select style="width:300px;" class="form-control" id="fontsize">
+          <option value="13">13</option>
+          <option value="14">14</option>
+          <option value="15">15</option>
+          <option value="16">16</option>
+          <option value="17">17</option>
+          <option value="18">18</option>
+        </select>
+      </div>
 
-<div class="form-group">
-  <label for="checkpage">Проверять индексацию открытой страницы:</label>
-  <select style="width:400px;" class="form-control" id="checkpage">
- <option value="0">не проверять</option>
- <option value="3">проверять в Yandex и Google</option>
- <option value="1">проверять только в Yandex</option>
- <option value="2">проверять только в Google</option>
-  </select>
-</div>
+      <div class="form-group">
+        <label for="checkpage">Проверять индексацию открытой страницы:</label>
+        <select style="width:400px;" class="form-control" id="checkpage">
+          <option value="0">не проверять</option>
+          <option value="3">проверять в Yandex и Google</option>
+          <option value="1">проверять только в Yandex</option>
+          <option value="2">проверять только в Google</option>
+        </select>
+      </div>
 
-<div class="form-group">
-<label>Дополнительные настройки:</label><br>
-<label class="checkbox-inline"><input id="show_whois" type="checkbox" value="1">Отображать информацию whois</label>
-<!--
+      <div class="form-group">
+        <label>Дополнительные настройки:</label><br>
+        <label class="checkbox-inline"><input id="show_whois" type="checkbox" value="1">Отображать информацию
+          whois</label>
+        <!--
 <br>
 <label class="checkbox-inline"><input type="checkbox" value="">Отображать кнопки тиц и liveinternet</label>
 <br>
 <label class="checkbox-inline"><input type="checkbox" value="">Показывать ip адрес домена</label>
 -->
-</div>
+      </div>
 
-<div class="form-group">
-  <label for="linksbox">Панель ссылок:</label>
-  <textarea class="form-control" rows="12" id="linksbox"></textarea>
-</div>
-
-
-<div class="alert alert-success" id="status" style="display:none;"></div>
-
-<button class="btn btn-danger" id="default">Вернуть по умолчанию</button>
-<button class="btn btn-success" id="save">Сохранить изменения</button>
-
-<hr>
-<div id="news">
-<h3>Новости</h3>
-<p>
-  <b>Версия 1.8 (04.03.2025)</b>
-  <br>
-  - Обновлен google манифест на версию 3. Исправление мелких ошибок.
-  </p>
-<p>
-  <b>Версия 1.7 (25.11.2019)</b>
-  <br>
-  - Исправление ошибки определения показателя ИКС. Отображение количества отзывов в вебмастере яндекса. Исправление мелких ошибок.
-  </p>
-<p>
-<b>Версия 1.6 (19.12.2018)</b>
-<br>
-- Замена яндекс показателя ТИЦ на показатель ИКС. Исправление мелких ошибок.
-</p>
-<p>
-<b>Версия 1.5 (12.12.2016)</b>
-<br>
-- Добавлена функция отображения whois сайта (включается в настройках).
-</p>
-<p>
-<b>Версия 1.43-1.46 (30.05.2016-03.06.2016)</b>
-<br>
-- Исправление ошибок определения количества страниц в индексе яндекса.
-</p>
-
-<span style="cursor: pointer;color:blue;" id="show_more" href="#">...</span>
-<div id="news_more" style="display:none;">
-  <p>
-    <b>Версия 1.42 (08.05.2016)</b>
-    <br>
-    - Определение зеркала домена по яндексу (сприншот - <a target="_blank" href='http://joxi.ru/v29L59WIGKzqNm'>http://joxi.ru/v29L59WIGKzqNm</a>).
-    </p>
-  <p>
-    <b>Версия 1.41 (06.04.2016)</b>
-    <br>
-    - Исправлена ошибка проверки индексации в google, когда у сайта мало страниц в индексе
-    </p>
-    
-<p>
-<b>Версия 1.40 (26.03.2016)</b>
-<br>
-- Добавлена функция проверки индексции открытой страницы в Яндекс и Google<br>
-- Улучшена страница настроек (использован twitter bootsrap), добавлены настройки проверки индексации страниц
-</p>
-
-<p>
-<b>Версия 1.31 (11.03.2016)</b>
-<br>
-- Исправлена ошибка лишних запросов к поисковым системам для проверки индексации и тиц<br>
-- Теперь расширению не требуется доступ к вашей истории просмотров
-</p>
-
-<p>
-<b>Версия 1.30 (10.03.2016)</b>
-<br>
-- Добавлен показатель - возраст домена для .ru доменов (проверка по whois.nic.ru)<br>
-- Теперь при запросе капчи в google или yandex - появляется статус Error для большей информативности<br>
-- Код расширения выложен на <a target='_blank' href='https://github.com/marnautov/seomagic'>github</a>
-</p>
+      <div class="form-group">
+        <label for="linksbox">Панель ссылок:</label>
+        <textarea class="form-control" rows="12" id="linksbox"></textarea>
+      </div>
 
 
-<p>
-<b>Версия 1.20 (25.01.2016)</b>
-<br>
-- Добавлены настройки расширения (размер шрифта, кастомизация блока ссылок)<br>
-- Исправлена ошибка определения индексации Яндекс и Гугла, происходившая в некоторых случаях
-</p>
+      <div class="alert alert-success" id="status" style="display:none;"></div>
 
-<p>
-<b>Версия 1.10 (15.01.2016)</b>
-<br>
-- Исправлены незначительные ошибки, оптимизация работы скриптов
-</p>
-</div>
+      <button class="btn btn-danger" id="default">Вернуть по умолчанию</button>
+      <button class="btn btn-success" id="save">Сохранить изменения</button>
 
-</div>
+      <hr>
+      <div id="news">
+        <h3>Новости</h3>
+        <p>
+          <b>Версия 1.81 (06.03.2025)</b>
+          <br>
+          - Починил отображение отзывов рядом с тиц, также добавил вывод количество положительных и отрицательных отзывов.
+        </p>
+        <p>
+          <b>Версия 1.8 (04.03.2025)</b>
+          <br>
+          - Обновлен google манифест на версию 3. Исправление мелких ошибок.
+        </p>
+        <p>
+          <b>Версия 1.7 (25.11.2019)</b>
+          <br>
+          - Исправление ошибки определения показателя ИКС. Отображение количества отзывов в вебмастере яндекса.
+          Исправление мелких ошибок.
+        </p>
+        <p>
+          <b>Версия 1.6 (19.12.2018)</b>
+          <br>
+          - Замена яндекс показателя ТИЦ на показатель ИКС. Исправление мелких ошибок.
+        </p>
+        <p>
+          <b>Версия 1.5 (12.12.2016)</b>
+          <br>
+          - Добавлена функция отображения whois сайта (включается в настройках).
+        </p>
+        <p>
+          <b>Версия 1.43-1.46 (30.05.2016-03.06.2016)</b>
+          <br>
+          - Исправление ошибок определения количества страниц в индексе яндекса.
+        </p>
 
-<hr>
+        <span style="cursor: pointer;color:blue;" id="show_more" href="#">...</span>
+        <div id="news_more" style="display:none;">
+          <p>
+            <b>Версия 1.42 (08.05.2016)</b>
+            <br>
+            - Определение зеркала домена по яндексу (сприншот - <a target="_blank"
+              href='http://joxi.ru/v29L59WIGKzqNm'>http://joxi.ru/v29L59WIGKzqNm</a>).
+          </p>
+          <p>
+            <b>Версия 1.41 (06.04.2016)</b>
+            <br>
+            - Исправлена ошибка проверки индексации в google, когда у сайта мало страниц в индексе
+          </p>
 
-<a target="_blank" href="mailto:amxm@ya.ru"><img height="18" src="https://cdn0.iconfinder.com/data/icons/elysium-icons/24/Mail.png"></a>
+          <p>
+            <b>Версия 1.40 (26.03.2016)</b>
+            <br>
+            - Добавлена функция проверки индексции открытой страницы в Яндекс и Google<br>
+            - Улучшена страница настроек (использован twitter bootsrap), добавлены настройки проверки индексации страниц
+          </p>
 
-</div>
+          <p>
+            <b>Версия 1.31 (11.03.2016)</b>
+            <br>
+            - Исправлена ошибка лишних запросов к поисковым системам для проверки индексации и тиц<br>
+            - Теперь расширению не требуется доступ к вашей истории просмотров
+          </p>
 
-</div>
+          <p>
+            <b>Версия 1.30 (10.03.2016)</b>
+            <br>
+            - Добавлен показатель - возраст домена для .ru доменов (проверка по whois.nic.ru)<br>
+            - Теперь при запросе капчи в google или yandex - появляется статус Error для большей информативности<br>
+            - Код расширения выложен на <a target='_blank' href='https://github.com/marnautov/seomagic'>github</a>
+          </p>
 
 
-<script src="options.js"></script>
+          <p>
+            <b>Версия 1.20 (25.01.2016)</b>
+            <br>
+            - Добавлены настройки расширения (размер шрифта, кастомизация блока ссылок)<br>
+            - Исправлена ошибка определения индексации Яндекс и Гугла, происходившая в некоторых случаях
+          </p>
+
+          <p>
+            <b>Версия 1.10 (15.01.2016)</b>
+            <br>
+            - Исправлены незначительные ошибки, оптимизация работы скриптов
+          </p>
+        </div>
+
+      </div>
+
+      <hr>
+
+      <a target="_blank" href="mailto:amxm@ya.ru"><img height="18"
+          src="https://cdn0.iconfinder.com/data/icons/elysium-icons/24/Mail.png"></a>
+
+    </div>
+
+  </div>
+
+
+  <script src="options.js"></script>
 </body>
+
 </html>
