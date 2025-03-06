@@ -15,7 +15,7 @@ chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs)
 
 		// проверка индексации страниц в яндекс и гугл
 		if (options['checkpage'] & 1) get_url("https://yandex.ru/yandsearch?text=url%3A" + urlc + "%20%7C%20url%3Awww." + urlc, yandex_page);
-		if (options['checkpage'] & 2) get_url("https://www.google.ru/search?q=site%3A" + urlc, google_page);
+		if (options['checkpage'] & 2) get_url("https://www.google.com/search?q=site%3A" + urlc, google_page);
 
 
 		if (options['fontsize'] && options['linksbox']) {
@@ -65,10 +65,9 @@ chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs)
 	 */
 	get_url('https://webmaster.yandex.ru/siteinfo/?host=' + domen, function (str) {
 
-		//console.log(str);
+		console.log('yandex_iks', str);
 		var found = str.match(/sqi":([0-9\s]*),/);
 		var yandex_iks = found[1].replace(/[^0-9]/,'');
-
 
 		var found = str.match(/"count":([0-9]*),"views"/);
 		if (found){
@@ -116,16 +115,17 @@ chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs)
 	// индекс страницы в яндексе
 	function yandex_page(str) {
 
-		if (!str || str.match('/captcha/')) {
+		if (!str || str.match(/(captcha|Вы не робот)/i)) {
 			document.getElementById('yap').style.color = 'orange';
 			return false;
 		}
 
-		if (str.match(/ничего не нашлось/)) {
+		if (str.match(/(ничего не нашлось|ничего не нашли)/i)) {
 			document.getElementById('yap').style.color = 'red';
 		} else {
 			document.getElementById('yap').style.color = 'green';
 			document.getElementById('yap').style.fontWeight = 'bold';
+			console.log('Нашли страницу!');
 		}
 
 
@@ -134,12 +134,12 @@ chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs)
 	// индекс страницы в google
 	function google_page(str) {
 
-		if (!str) {
+		if (!str || str.match(/captcha/i)) {
 			document.getElementById('gop').style.color = 'orange';
 			return false;
 		}
 
-		if (str.match(/(ничего не найдено|did not match any documents)/)) {
+		if (str.match(/(ничего не найдено|did not match any documents)/i)) {
 			document.getElementById('gop').style.color = 'red';
 		} else {
 			document.getElementById('gop').style.color = 'green';
@@ -149,11 +149,11 @@ chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs)
 	}
 
 
-
 	// яндекс индекс через выдачу
 	get_url("https://yandex.ru/search/?text=site:" + domen, yandex_index);
 	function yandex_index(str) {
 
+		// console.log('yandex_index HTML', str)
 		//var found = str.match(/нашлось (.*) ответов/);
 		//var found = str.match(/"found":"(.+?)ответ/);
 		var found = str.match(/(?:нашлось|нашёлся|нашлась)(.+?)(результат|ответ)/);
@@ -182,8 +182,13 @@ chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs)
 	}
 
 	// google индекс через выдачу
-	get_url("https://www.google.ru/search?q=site:" + domen, google_index);
+	get_url("https://www.google.com/search?q=site:" + domen, google_index);
 	function google_index(str) {
+
+		if (!str || str.match(/captcha/i)) {
+			document.getElementById('google_index').style.color = 'orange';
+			return false;
+		}
 
 		var found = str.match(/(?:примерно|Результатов:|About) (.+?)</);
 		if (found) {
